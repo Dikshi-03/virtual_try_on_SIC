@@ -37,7 +37,7 @@ VITON-HD/
 - **Detailed Segmentation Maps**: Provided for precise body part and garment region identification.
 - **Pose Annotations**: Keypoints for human poses, helping with accurate clothing alignment.
 
-To learn more about the dataset, please refer to the VITON-HD [repository link](https://github.com/viton-hd).
+
 
 ## Key Features of the AI-Based Virtual Try-On System
 
