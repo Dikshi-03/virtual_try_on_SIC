@@ -1,119 +1,54 @@
-# virtual_try_on_SIC
+# Virtual Try-On with OpenCV and Pose Detection
 
-# AI-Based Virtual Try-On with VITON-HD Dataset
+This project demonstrates a Virtual Try-On system using OpenCV, Pose Detection, and image overlays. It allows users to try on different shirts virtually and select the one they like.
 
-## Overview
+## Features
 
-This project implements an AI-powered virtual try-on system based on deep learning techniques, designed to simulate how different clothing items will appear on a person. Using the **VITON-HD dataset**, we create a high-resolution virtual try-on system that transfers a target clothing item onto a model image in a realistic and visually appealing way, synthesizing outputs at a resolution of **1024x768** pixels.
+- Real-time pose detection to identify key body points.
+- Overlay different shirts on the user's upper body.
+- Change shirts with gesture controls.
+- Display a selection rectangle around the currently worn shirt.
+- Display all available shirt options in the top left corner.
 
-The system addresses key challenges in virtual try-on tasks, such as handling misalignments between clothing and body, and maintaining the texture and detail of the garments. It leverages the alignment-aware techniques introduced in VITON-HD (ALIAS Normalization and ALIAS Generator) to ensure high-quality, artifact-free results.
+## Prerequisites
 
-## Dataset
+Before you begin, ensure you have met the following requirements:
 
-We use the **VITON-HD dataset**, which is specifically designed for high-resolution virtual try-on tasks. This dataset includes images of human models and clothing items, segmentation maps for the body and garments, and annotations for pose estimation.
+- Python 3.x installed on your system.
+- OpenCV and cvzone libraries installed. You can install them using pip:
 
-### Dataset Structure:
+  ```bash
+  pip install opencv-python
+  pip install cvzone
 
-```
-VITON-HD/
-│
-├── images/
-│   ├── model_images/          # Images of human models (1024x768 resolution)
-│   ├── clothing_images/       # Images of clothing items (1024x768 resolution)
-│
-├── segmentation_maps/
-│   ├── model_segmentations/   # Segmentation maps of the models, identifying body parts
-│   ├── clothing_segmentations/ # Segmentation maps of the clothing items
-│
-├── annotations/
-│   ├── pose_annotations/      # Keypoint annotations for human body pose estimation
-│   ├── bounding_boxes/        # Bounding box annotations for models and garments
-│
-└── README.md                  # Information about the dataset
-```
+A video source (e.g., webcam or video file) for trying on shirts.
+Shirt images in a folder (e.g., "Resources/Shirts") that you want to use for virtual try-on.
 
-### Dataset Features:
-- **High-Resolution Images**: 1024x768 images for both models and garments.
-- **Detailed Segmentation Maps**: Provided for precise body part and garment region identification.
-- **Pose Annotations**: Keypoints for human poses, helping with accurate clothing alignment.
-
-
-
-## Key Features of the AI-Based Virtual Try-On System
-
-1. **High-Resolution Image Synthesis**: Generates try-on images at a resolution of **1024x768**, providing detailed and realistic virtual fitting experiences.
-   
-2. **ALIAS Normalization and Generator**: Utilizes alignment-aware techniques from VITON-HD to handle misalignment challenges and ensure the final output is free from artifacts.
-
-3. **Texture Preservation**: Ensures that fine garment details, such as patterns and textures, are maintained during the virtual try-on process.
-
-4. **Pose-Aware Synthesis**: Leverages pose annotations to align the clothing accurately with the body, regardless of pose or posture.
-
-5. **Flexible Clothing Transfer**: The system works with different garment types (e.g., tops, dresses) and can be extended to support additional categories with further training.
-
-## Installation
-
-To set up and run the virtual try-on system, follow these steps:
-
-1. **Clone the Repository**:
-   ```
-   git clone https://github.com/your-repo/virtual-try-on.git
-   cd virtual-try-on
-   ```
-
-2. **Install Dependencies**:
-   Ensure you have Python installed (>= 3.7), and then install the required dependencies.
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. **Download the VITON-HD Dataset**:
-   Download the **VITON-HD** dataset from (https://www.kaggle.com/datasets/marquis03/high-resolution-viton-zalando-dataset)
-   ```
-   data/
-   ├── VITON-HD/
-       ├── images/
-       ├── segmentation_maps/
-       ├── annotations/
-   ```
-
-4. **Training the Model**:
-   You can train the virtual try-on model using the following command:
-   ```
-   python train.py --dataset_dir data/VITON-HD/ --output_dir models/
-   ```
-
-5. **Running Inference**:
-   To run the virtual try-on system and generate results using the pre-trained model:
-   ```
-   python tryon.py --input_dir data/VITON-HD/images/ --model_dir models/pretrained/
-   ```
-
-6. **View Results**:
-   The synthesized try-on images will be saved in the `results/` directory.
+## Usage:
 
 ## Usage
 
-This system allows you to perform virtual try-on by selecting a human model and a clothing item from the dataset. The output will be a synthesized image where the clothing item is realistically transferred onto the model, retaining the garment’s texture and fit.
+1. Clone this repository to your local machine:
 
-Example usage:
-```bash
-python tryon.py --model_image data/VITON-HD/images/model_images/0001.jpg --clothing_image data/VITON-HD/images/clothing_images/0001.jpg --output results/0001_tryon.jpg
-```
+   ```bash
+   git clone https://github.com/yourusername/virtual-tryon.git
 
-## Results and Output
+2. Navigate to the project directory:
+   ```bash
+   cd virtual-tryon
 
-- **Input**: A model image and a target clothing item.
-- **Output**: A high-resolution image (1024x768) of the model wearing the target clothing.
-  
-Examples of generated try-on images can be found in the `results/` folder.
+3. Run the 'main.py' script:
+   ```bash
+   python main.py
 
-## Models and Training
+4. Use your webcam or provide a video file as the video source. The application will detect your upper body and overlay different shirts as you move.
 
-The system supports the training of virtual try-on models using VITON-HD dataset. You can modify the hyperparameters in `train.py` to experiment with different architectures and techniques.
+5. Control the shirt selection with the following gestures:
+-If your left hand goes above your head, it will cycle through shirt options to the left.
+-If your right hand goes above your head, it will cycle through shirt options to the right.
 
-- **Pre-trained Models**: Pre-trained models are available in the `models/pretrained/` folder for direct inference.
-- **Training Custom Models**: You can train custom models with different configurations by modifying the dataset, learning rate, or architecture.
+6. The selected shirt will have a rectangular highlight around it.
+
 
 
 
